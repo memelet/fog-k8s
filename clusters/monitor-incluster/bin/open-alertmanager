@@ -1,0 +1,3 @@
+#!/bin/bash
+
+xdg-open http://alertmanager.${K3D_HOST}:${K3D_PORT_TRAEFIK_WEB}

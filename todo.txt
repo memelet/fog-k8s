@@ -1,0 +1,23 @@
+Do:
+- TODO The use of kustomize cross-directory and make cross-directory is smelly. Still trying to find clean dev tooling. However, having kustomize to render the helm charts and then kapp to deply is quite nice.
+
+- TODO Setup grafana prometheus exemplars - https://vbehar.medium.com/using-prometheus-exemplars-to-jump-from-metrics-to-traces-in-grafana-249e721d4192
+
+- TODO Still need some variable replacement scheme for kustomize. Examples:
+  - cluster/monitor-incluster/loki/grafana-datasource.yaml, where `datasources.url` is hard-coded
+  - bases/tns/env-patches.yaml, where `value: tempo.tempo.svc.cluster.local` is hard-coded
+  - `release: kube-prometheus-stack` in various places
+
+- TODO Need to really understand the promtail selectors.
+
+- TODO Need to really understand the loki label rewriting.
+
+- TODO Figure out why prometheus CRDs always seem to need to be udpated (kapp issue?)
+
+Maybe:
+
+- TODO Look into using grafana-operator. Using the helm chart, only the dashboards are dynamic. This means that all datasource configmaps must already be created when grafana is deployed. (https://github.com/grafana-operator/grafana-operator)
+
+- TODO Consider switching to bitnanmi charts
+
+- TODO investigate K3D_FIX_DNS=1 feature flag

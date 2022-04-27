@@ -1,0 +1,14 @@
+# https://github.com/grafana/helm-charts/tree/main/charts/promtail
+# nonk8s
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: promtail
+name: promtail
+repo: https://grafana.github.io/helm-charts
+version: 3.8.1
+releaseName: promtail
+namespace: loki
+valuesInLine:
+  config:
+    lokiAddress: http://loki:3100/loki/api/v1/push

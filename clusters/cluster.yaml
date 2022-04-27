@@ -1,0 +1,65 @@
+# nonk8s
+apiVersion: k3d.io/v1alpha4
+kind: Simple
+
+#---- per cluster ----
+
+image: rancher/k3s:${K3S_VERSION}
+token: ${K3D_NAME}
+servers: ${K3D_SERVER_COUNT}
+agents: ${K3D_AGENT_COUNT}
+network: ${K3D_NAME}
+
+kubeAPI:
+  host: "127-0-0-1.nip.io"
+  hostIP: "127.0.0.1"
+  hostPort: "${K3D_PORT_HOST}"
+
+ports:
+  # traefik web
+  - port: ${K3D_PORT_TRAEFIK_WEB}:80
+    nodeFilters:
+      - loadbalancer
+
+  # traefik websecure
+  - port: ${K3D_PORT_TRAEFIK_WEBSECURE}:443
+    nodeFilters:
+      - loadbalancer
+
+  # traefik dashboard
+  - port: ${K3D_PORT_TRAEFIK_DASHBOARD}:9000
+    nodeFilters:
+      - loadbalancer
+
+volumes:
+  - volume: ${DATA_DIR}/${K3D_NAME}:/var/lib/rancher/k3s/storage
+    nodeFilters:
+      - server:0
+      - agent:*
+
+#---- common ----
+
+options:
+  k3d:
+    wait: true
+    timeout: "180s"
+  k3s:
+    extraArgs:
+      - arg: --disable=traefik
+        nodeFilters:
+          - server:*
+  kubeconfig:
+    updateDefaultKubeconfig: false
+    switchCurrentContext: false
+#  runtime:
+#    gpuRequest: all
+
+registries:
+  config: |
+    mirrors:
+      "docker.io":
+        endpoint:
+          - http://host.k3d.internal:5000
+      "docker.elastic.co":
+        endpoint:
+          - http://host.k3d.internal:5001

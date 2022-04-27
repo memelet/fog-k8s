@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  labels:
+    release: kube-prometheus-stack
+spec:
+  $patch: replace
+  ports:
+    - name: http
+      port: 8001
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    release: kube-prometheus-stack
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadgen
+  labels:
+    release: kube-prometheus-stack

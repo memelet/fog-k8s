@@ -1,0 +1,18 @@
+# https://github.com/grafana/helm-charts/tree/main/charts/loki
+# nonk8s
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: loki
+name: loki
+repo: https://grafana.github.io/helm-charts
+version: 2.11.1
+releaseName: loki
+namespace: loki
+valuesInLine:
+  serviceName: loki.loki.svc.cluster.local
+  persistence:
+    enabled: true
+    size: 1Gi
+  ingress:
+    enabled: false

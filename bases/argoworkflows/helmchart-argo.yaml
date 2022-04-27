@@ -1,0 +1,21 @@
+# https://github.com/argoproj/argo-helm
+# nonk8s
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: argo-workflows
+name: argo-workflows
+repo: https://argoproj.github.io/argo-helm
+version: 0.8.0
+releaseName: argo-workflow
+namespace: argo-workflow
+#valuesInLine:
+#  server:
+#    secure: false
+#    auth:
+#      enabled: false
+#  ingress:
+#    enabled: true
+
+#  installCRDs: true
+#  issuer: selfsigned

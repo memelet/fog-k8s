@@ -1,0 +1,21 @@
+# https://github.com/bitnami/charts/tree/master/bitnami/argo-workflows/#installing-the-chart
+# nonk8s
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: argo-workflows
+name: argo-workflows
+repo: https://charts.bitnami.com/bitnami
+version: 0.1.7
+releaseName: argo-workflow
+namespace: argo-workflow
+#valuesInLine:
+#  server:
+#    secure: false
+#    auth:
+#      enabled: false
+#  ingress:
+#    enabled: true
+
+#  installCRDs: true
+#  issuer: selfsigned

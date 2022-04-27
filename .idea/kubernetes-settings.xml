@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="KubernetesApiSettings">
+    <option name="kubeconfigPath" value="$PROJECT_DIR$/.kube/monitor.yaml" />
+  </component>
+  <component name="KubernetesSettings">
+    <option name="getSpecFromCluster" value="true" />
+    <specSources>
+      <SpecSource>
+        <option name="pathOrUrl" value="$PROJECT_DIR$/bases/traefik/charts/traefik/crds/ingressroute.yaml" />
+      </SpecSource>
+      <SpecSource>
+        <option name="pathOrUrl" value="$PROJECT_DIR$/bases/traefik/charts/traefik/crds/ingressroutetcp.yaml" />
+      </SpecSource>
+    </specSources>
+  </component>
+</project>

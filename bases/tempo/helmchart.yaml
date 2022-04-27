@@ -1,0 +1,17 @@
+# https://github.com/grafana/helm-charts/tree/main/charts/tempo
+# nonk8s
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: tempo
+name: tempo
+repo: https://grafana.github.io/helm-charts
+version: 0.14.2
+releaseName: tempo
+namespace: tempo
+valuesInLine:
+persistence:
+  enabled: false
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi

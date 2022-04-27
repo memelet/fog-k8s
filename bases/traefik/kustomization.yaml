@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+#SMELL not sure why this is needed
+namespace: traefik
+
+generators:
+  - helmchart.yaml
+
+resources:
+  - namespace.yaml
+  - ingressroute.yaml
+

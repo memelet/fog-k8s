@@ -1,0 +1,33 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kube-prometheus-stack-prometheus
+  namespace: prometheus
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`prometheus.127-0-0-1.nip.io`)
+      services:
+        - name: kube-prometheus-stack-prometheus
+          kind: Service
+          port: 9090
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kube-prometheus-stack-alertmanager
+  namespace: prometheus
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`alertmanager.127-0-0-1.nip.io`)
+      services:
+        - name: kube-prometheus-stack-alertmanager
+          kind: Service
+          port: 9093
+

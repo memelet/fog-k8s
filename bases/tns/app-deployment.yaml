@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: app
+    spec:
+      containers:
+        - name: app
+          image: grafana/tns-app:9c1ab38
+          ports:
+            - containerPort: 80
+          args:
+            - -log.level=debug
+            - http://db:8000
+          env:
+            - name: JAEGER_AGENT_HOST
+              value: tempo.tempo.svc.cluster.local
+            - name: JAEGER_TAGS
+              value: job=tns/app
+            - name: JAEGER_SAMPLER_TYPE
+              value: const
+            - name: JAEGER_SAMPLER_PARAM
+              value: "1"

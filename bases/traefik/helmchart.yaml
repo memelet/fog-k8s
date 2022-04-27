@@ -1,0 +1,25 @@
+# https://github.com/traefik/traefik-helm-chart
+# nonk8s
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: traefik
+name: traefik
+repo: https://helm.traefik.io/traefik
+version: 10.19.4
+releaseName: traefik
+namespace: traefik
+includeCRDs: true
+valuesInline:
+  ports:
+    traefik:
+      expose: true
+    web:
+      expose: true
+    websecure:
+      expose: true
+      tls:
+        enabled: true
+  ingressRoute:
+    dashboard:
+      enabled: false

@@ -1,0 +1,38 @@
+# https://github.com/grafana/helm-charts
+# nonk8s
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: grafana
+name: grafana
+repo: https://grafana.github.io/helm-charts
+version: 6.26.5
+releaseName: grafana
+namespace: grafana
+valuesInLine:
+#  image:
+#    repository: grafana/grafana
+#    tag: 8.2.1
+  hosts:
+    - grafana.127-0-0-1.nip.io
+  ingress:
+    enabled: false
+  persistence:
+    enabled: true
+  sidecar:
+    dashboards:
+      enabled: true
+      searchNamespace: ALL
+    datasources:
+      enabled: true
+      searchNamespace: ALL
+    notifiers:
+      enabled: true
+      searchNamespace: ALL
+  adminUser: admin
+  admin:
+    existingSecret: grafana-admin
+    userKey: admin-user
+    passwordKey: admin-password
+  testFramework:
+    enabled: false

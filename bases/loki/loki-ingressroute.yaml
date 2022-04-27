@@ -1,0 +1,17 @@
+# This would be for if loki was in monitor-outcluster
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: loki
+  namespace: loki
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`loki.127-0-0-1.nip.io`)
+      services:
+        - name: loki
+          kind: Service
+          port: 3100

@@ -1,0 +1,23 @@
+# Replace <<..>> with cluster specific values
+
+export CLUSTER_DIR=$PWD
+
+export K3D_NAME=<<name>>
+export K3D_SERVER_COUNT=<<server-count>>
+export K3D_AGENT_COUNT=<<agent-count>>
+export K3D_PORT_START=<<start-port>>
+
+export K3D_HOST=${K3D_HOST:=127-0-0-1.nip.io}
+export K3D_PORT_HOST=${K3D_PORT_START}
+export K3D_PORT_TRAEFIK_WEB=$(($K3D_PORT_START+1))
+export K3D_PORT_TRAEFIK_WEBSECURE=$(($K3D_PORT_START+2))
+export K3D_PORT_TRAEFIK_DASHBOARD=$(($K3D_PORT_START+3))
+
+# If more ports are defined override this value after source_env
+export K3D_PORT_NEXT=$((K3D_PORT_START+4))
+
+source_env ../.envrc.cluster-base
+
+# If extending another cluster, optionally add its' bin/, eg:
+# PATH_add $CLUSTER_DIR/../monitor-incluster/bin
+

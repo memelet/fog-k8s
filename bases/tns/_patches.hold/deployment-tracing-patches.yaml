@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  release:
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          env:
+            - name: JAEGER_AGENT_HOST
+              value: tempo.tempo.svc.cluster.local
+            - name: JAEGER_TAGS
+              $patch: delete
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  template:
+    spec:
+      containers:
+        - name: db
+          env:
+            - name: JAEGER_AGENT_HOST
+              value: tempo.tempo.svc.cluster.local
+            - name: JAEGER_TAGS
+              $patch: delete
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadgen
+spec:
+  template:
+    spec:
+      containers:
+        - name: loadgen
+          env:
+            - name: JAEGER_AGENT_HOST
+              value: tempo.tempo.svc.cluster.local
+            - name: JAEGER_TAGS
+              $patch: delete

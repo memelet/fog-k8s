@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tempo-grafana-datasource
+  namespace: tempo
+  labels:
+    grafana_datasource: "1"
+data:
+  tempo-datasource.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: Tempo
+        uid: tempo_datasource
+        type: tempo
+        access: proxy
+        url: http://tempo.tempo.svc.cluster.local:3100
+        version: 1

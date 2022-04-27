@@ -1,0 +1,24 @@
+# https://github.com/grafana/tns
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: tns
+
+resources:
+  - namespace.yaml
+  - https://raw.githubusercontent.com/grafana/tns/main/production/k8s-yamls/db-dep.yaml
+  - https://raw.githubusercontent.com/grafana/tns/main/production/k8s-yamls/db-svc.yaml
+  - https://raw.githubusercontent.com/grafana/tns/main/production/k8s-yamls/app-dep.yaml
+  - https://raw.githubusercontent.com/grafana/tns/main/production/k8s-yamls/app-svc.yaml
+  - https://raw.githubusercontent.com/grafana/tns/main/production/k8s-yamls/loadgen-dep.yaml
+  - https://raw.githubusercontent.com/grafana/tns/main/production/k8s-yamls/loadgen-svc.yaml
+  - servicemonitor.yaml
+  - app-grafana-dashboard.yaml
+
+# {bk} The effort to patch vs just recreate was out of porportion. But for now I want to keep
+# the patch resources since they have some good learnings.
+patchesStrategicMerge:
+  - service-metrics-patches.yaml
+  - deployment-tracing-patches.yaml
+

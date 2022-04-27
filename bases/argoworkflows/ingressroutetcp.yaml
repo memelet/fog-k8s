@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: argo-workflow
+spec:
+  entryPoints:
+    - websecure
+  tls:
+      passthrough: true
+  routes:
+    - match: HostSNI(`argowf.127-0-0-1.nip.io`)
+      services:
+        - name: argo-server
+          port: 2746

@@ -1,0 +1,15 @@
+# https://rancher.com/docs/rancher/v2.x/en/installation/install-rancher-on-k8s/chart-options/
+# nonk8s
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: rancher
+name: rancher
+repo: https://releases.rancher.com/server-charts/latest
+version: 2.6.2
+releaseName: rancher
+namespace: cattle-system
+valuesInLine:
+  ingress:
+    enabled: false
+  bootstrapPassword: rancher

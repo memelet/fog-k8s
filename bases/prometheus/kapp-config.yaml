@@ -1,0 +1,23 @@
+# https://kubernetes.slack.com/archives/CH8KCCKA5/p1627324069139200?thread_ts=1627197550.085600&cid=CH8KCCKA5
+
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+metadata:
+  name: prometheus-kapp-config
+  namespace: prometheus
+
+minimumRequiredVersion: 0.34.0
+ownershipLabelRules:
+  - path: [ spec, podMetadata, labels ]
+    resourceMatchers:
+      - apiVersionKindMatcher:
+          { apiVersion: monitoring.coreos.com/v1, kind: Prometheus }
+      - apiVersionKindMatcher:
+          { apiVersion: monitoring.coreos.com/v1, kind: Alertmanager }
+rebaseRules:
+  - paths:
+      - [ secrets, { allIndexes: true }, name ]
+    type: copy
+    sources: [ new, existing ]
+    resourceMatchers:
+      - apiVersionKindMatcher: { apiVersion: v1, kind: ServiceAccount }

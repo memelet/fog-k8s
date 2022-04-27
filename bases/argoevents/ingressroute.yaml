@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argo-server
+  namespace: argo-events
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`argoevents.127-0-0-1.nip.io`)
+      priority: 10
+      services:
+        - name: argo-server
+          port: 80

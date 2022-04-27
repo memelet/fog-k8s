@@ -1,0 +1,17 @@
+# https://github.com/grafana/tns
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: tns
+
+resources:
+  - namespace.yaml
+  - db-deployment.yaml
+  - db-service.yaml
+  - app-deployment.yaml
+  - app-service.yaml
+  - loadgen-deployment.yaml
+  - loadgen-service.yaml
+  - servicemonitor.yaml
+  - app-grafana-dashboard.yaml

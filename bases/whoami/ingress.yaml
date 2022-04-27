@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami
+  namespace: "{{ k8s_namespace }}"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /whoami
+            pathType: Exact
+            backend:
+              service:
+                name: whoami
+                port:
+                  number: {{ http_port | int }}

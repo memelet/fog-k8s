@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argo-workflow
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`argowf.127-0-0-1.nip.io`)
+      services:
+        - name: argo-server
+          kind: Service
+          port: 2746
